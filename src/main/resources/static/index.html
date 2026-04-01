@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Setup | Premium CRUD App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1>Library Management</h1>
+            <p>Manage your collection with elegance.</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Book Form -->
+            <section class="glass-panel form-section">
+                <h2 id="form-title">Add New Book</h2>
+                <form id="book-form">
+                    <input type="hidden" id="book-id">
+                    
+                    <div class="input-group">
+                        <input type="text" id="title" required placeholder=" ">
+                        <label for="title">Book Title</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" id="author" required placeholder=" ">
+                        <label for="author">Author Name</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="number" id="publishedYear" required placeholder=" " min="1000" max="2100">
+                        <label for="publishedYear">Published Year</label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary" id="submit-btn">Save Book</button>
+                        <button type="button" class="btn-secondary hidden" id="cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Book List -->
+            <section class="list-section">
+                <div class="section-header">
+                    <h2>Your Collection</h2>
+                    <div class="search-bar">
+                        <input type="number" id="search-id" placeholder="Search by ID...">
+                        <button type="button" id="search-btn" class="btn-icon">🔍</button>
+                        <button type="button" id="clear-search-btn" class="btn-icon hidden">✖</button>
+                    </div>
+                </div>
+                
+                <div id="books-grid" class="books-grid">
+                    <!-- Books will be injected here via JS -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

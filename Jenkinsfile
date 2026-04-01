@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        gradle 'Gradle'   // We'll configure this in Jenkins later
+        gradle 'Gradle'
     }
 
     stages {
@@ -20,18 +20,18 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker buildx build --load -t library-management:${BUILD_NUMBER} .'
+                sh 'docker build -t library-management:${BUILD_NUMBER} .'
             }
         }
 
         stage('Deploy Container') {
             steps {
                 script {
-                    // Stop and remove old container if exists
+                    // Stop and remove old container
                     sh 'docker stop my-library-app || true'
                     sh 'docker rm my-library-app || true'
                     
-                    // Start new container
+                    // Run new container
                     sh 'docker run -d -p 8080:8080 --name my-library-app library-management:${BUILD_NUMBER}'
                 }
             }
@@ -40,7 +40,7 @@ pipeline {
 
     post {
         success {
-            echo '✅ Pipeline Success! Application is deployed.'
+            echo '✅ Pipeline Success! Application deployed on port 8080'
         }
         failure {
             echo '❌ Pipeline Failed!'

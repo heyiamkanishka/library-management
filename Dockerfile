@@ -14,13 +14,12 @@
 #ENTRYPOINT ["java", "-jar", "app.jar"]
 
 
-# Best for Spring Boot + Gradle projects
 FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 
-# Copy only the executable Spring Boot fat JAR (this is the correct one)
-COPY build/libs/*-boot.jar app.jar
+# Copy the correct Spring Boot executable JAR
+COPY build/libs/library-management-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 

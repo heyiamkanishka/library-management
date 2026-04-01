@@ -18,8 +18,9 @@ FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 
-# Copy the correct Spring Boot executable JAR
-COPY build/libs/library-management-0.0.1-SNAPSHOT.jar app.jar
+# Copy all JARs and remove the plain one, keep the main one
+COPY build/libs/*.jar ./
+RUN rm *-plain.jar && mv *.jar app.jar
 
 EXPOSE 8080
 

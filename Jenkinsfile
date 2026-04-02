@@ -32,7 +32,7 @@ pipeline {
                     sh 'docker rm my-library-app || true'
                     
                     // Run new container
-                    sh 'docker run -d -p 8080:8080 --name my-library-app library-management:${BUILD_NUMBER}'
+                    sh 'docker run -d -p 8081:8080 --name my-library-app library-management:${BUILD_NUMBER}'
                 }
             }
         }

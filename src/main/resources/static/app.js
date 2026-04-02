@@ -1,6 +1,6 @@
 // We'll point to localhost:8080 explicitly just in case they open the index.html directly from file system.
 // Otherwise relative path is fine too.
-const API_URL = '/books';
+const API_URL = '/api/books';
 
 // DOM Elements
 const bookForm = document.getElementById('book-form');

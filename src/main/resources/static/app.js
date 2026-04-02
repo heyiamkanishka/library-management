@@ -1,6 +1,6 @@
 // We'll point to localhost:8080 explicitly just in case they open the index.html directly from file system.
 // Otherwise relative path is fine too.
-const API_URL = 'http://localhost:8080/api/books'; 
+const API_URL = '/books';
 
 // DOM Elements
 const bookForm = document.getElementById('book-form');
@@ -35,7 +35,7 @@ async function fetchBooks() {
 // Render books to grid
 function renderBooks(books) {
     booksGrid.innerHTML = '';
-    
+
     if (books.length === 0) {
         booksGrid.innerHTML = `
             <div class="empty-state">
@@ -69,7 +69,7 @@ function renderBooks(books) {
 // Form Submit Handler (Create/Update)
 bookForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     const id = document.getElementById('book-id').value;
     const bookData = {
         title: document.getElementById('title').value,
@@ -95,7 +95,7 @@ bookForm.addEventListener('submit', async (e) => {
             });
             if (!res.ok) throw new Error('Failed to create book');
         }
-        
+
         resetForm();
         fetchBooks();
     } catch (err) {
@@ -118,7 +118,7 @@ window.editBook = (id) => {
     formTitle.innerText = 'Edit Book';
     submitBtn.innerText = 'Update Book';
     cancelBtn.classList.remove('hidden');
-    
+
     // Scroll to top to see form on mobile
     window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -126,13 +126,13 @@ window.editBook = (id) => {
 // Delete Book
 window.deleteBook = async (id) => {
     if (!confirm('Are you sure you want to delete this book?')) return;
-    
+
     try {
         const res = await fetch(`${API_URL}/${id}`, {
             method: 'DELETE'
         });
         if (!res.ok) throw new Error('Failed to delete book');
-        
+
         // Remove from UI manually to prevent strict refresh dependency, or just fetch again
         fetchBooks();
     } catch (err) {
@@ -157,7 +157,7 @@ searchBtn.addEventListener('click', async () => {
             clearSearchBtn.classList.remove('hidden');
             return;
         }
-        
+
         const book = await res.json();
         renderBooks([book]);
         clearSearchBtn.classList.remove('hidden');
@@ -186,8 +186,8 @@ function resetForm() {
 }
 
 function escapeHTML(str) {
-    if(!str) return '';
-    return str.toString().replace(/[&<>'"]/g, 
+    if (!str) return '';
+    return str.toString().replace(/[&<>'"]/g,
         tag => ({
             '&': '&amp;',
             '<': '&lt;',
